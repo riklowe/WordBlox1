@@ -48,7 +48,7 @@ class SKMultilineLabel: SKNode {
     /*============================================================*/
     /*============================================================*/
     
-    init(text:String, labelWidth:Int, pos:CGPoint=CGPoint(x:0, y:0), fontName:String="ChalkboardSE-Regular",fontSize:CGFloat=10,fontColor:SKColor=SKColor.black(),leading:Int=10, alignment:SKLabelHorizontalAlignmentMode = .center, shouldShowBorder:Bool = false)
+    init(text:String, labelWidth:Int, pos:CGPoint=CGPoint(x:0, y:0), fontName:String="ChalkboardSE-Regular",fontSize:CGFloat=10,fontColor:SKColor=SKColor.black,leading:Int=10, alignment:SKLabelHorizontalAlignmentMode = .center, shouldShowBorder:Bool = false)
     {
         self.text = text
         self.labelWidth = labelWidth
@@ -165,7 +165,7 @@ class SKMultilineLabel: SKNode {
         }
         self.rect = SKShapeNode(rectOf: CGSize(width: labelWidth, height: labelHeight))
         if let rect = self.rect {
-            rect.strokeColor = SKColor.green()
+            rect.strokeColor = SKColor.green
             rect.lineWidth = 1
             rect.position = CGPoint(x: pos.x, y: pos.y - (CGFloat(labelHeight) / 2.0))
             self.addChild(rect)

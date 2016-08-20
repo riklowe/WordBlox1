@@ -179,8 +179,8 @@ class BlockNode: SKSpriteNode {
         shape.position = CGPoint(x: -background.frame.width/2 + 2 , y: -background.frame.width/2 + 2)
         shape.glowWidth = 0
         shape.lineWidth = 3
-        shape.strokeColor = SKColor.black()
-        shape.fillColor = SKColor.clear()
+        shape.strokeColor = SKColor.black
+        shape.fillColor = SKColor.clear
         //shape.fillColor = self.color
         shape.zPosition = 11
         //shape.setScale(0.5)
@@ -190,7 +190,7 @@ class BlockNode: SKSpriteNode {
         myLabel.text = myValue
         myLabel.fontSize = 20;
         myLabel.position = CGPoint(x: background.frame.midX - (background.frame.midX/20) , y: background.frame.midY - (background.frame.midY/3))
-        myLabel.fontColor = UIColor.black()
+        myLabel.fontColor = UIColor.black
         myLabel.zPosition = 12
         shape.addChild(myLabel)
 
@@ -199,7 +199,7 @@ class BlockNode: SKSpriteNode {
             myPointsLabel.text =  String(myPoints)
             myPointsLabel.fontSize = 12;
             myPointsLabel.position = CGPoint(x: shape.frame.width - (20), y: 4)
-            myPointsLabel.fontColor = UIColor.black()
+            myPointsLabel.fontColor = UIColor.black
             myPointsLabel.zPosition = 12
             shape.addChild(myPointsLabel)
         }
@@ -225,8 +225,8 @@ class BlockNode: SKSpriteNode {
         shape.position =  CGPoint(x: -background.frame.width/2 + 2 , y: -background.frame.width/2 + 2)
         shape.glowWidth = 2
         shape.lineWidth = 3
-        shape.strokeColor = SKColor.red()
-        shape.fillColor = SKColor.clear()
+        shape.strokeColor = SKColor.red
+        shape.fillColor = SKColor.clear
         //shape.fillColor = self.color
         shape.zPosition = 11
         //shape.setScale(0.5)
@@ -236,7 +236,7 @@ class BlockNode: SKSpriteNode {
         myLabel.text = myValue
         myLabel.fontSize = 20;
         myLabel.position = CGPoint(x: background.frame.midX - (background.frame.midX/20) , y: background.frame.midY - (background.frame.midY/3))
-        myLabel.fontColor = UIColor.black()
+        myLabel.fontColor = UIColor.black
         myLabel.zPosition = 12
         shape.addChild(myLabel)
         
@@ -245,7 +245,7 @@ class BlockNode: SKSpriteNode {
             myPointsLabel.text =  String(myPoints)
             myPointsLabel.fontSize = 12;
             myPointsLabel.position = CGPoint(x: shape.frame.width - (23), y: 4)
-            myPointsLabel.fontColor = UIColor.black()
+            myPointsLabel.fontColor = UIColor.black
             myPointsLabel.zPosition = 12
             shape.addChild(myPointsLabel)
         }

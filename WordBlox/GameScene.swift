@@ -1,7 +1,6 @@
 //
 //  GameScene.swift
-//  NSTimerTest
-//
+//  WordBlox1
 //  Created by Richard Lowe on 16/02/2016.
 //  Copyright (c) 2016 Richard Lowe. All rights reserved.
 //
@@ -131,7 +130,7 @@ class GameScene: SKScene {
         
         gameScore = SKLabelNode()
         gameScore.text = ""
-        gameScore.fontColor = SKColor.black()
+        gameScore.fontColor = SKColor.black
         gameScore.fontSize = 25
         gameScore.fontName = mainFont
         gameScore.position = CGPoint(x: 20, y:10.0)
@@ -140,7 +139,7 @@ class GameScene: SKScene {
         
         wordScore = SKLabelNode()
         wordScore.text = ""
-        wordScore.fontColor = SKColor.black()
+        wordScore.fontColor = SKColor.black
         wordScore.fontSize = 25
         wordScore.fontName = mainFont
         wordScore.position = CGPoint(x: 20, y:30.0)
@@ -149,7 +148,7 @@ class GameScene: SKScene {
         
         wordLabel = SKLabelNode()
         wordLabel.text = ""
-        wordLabel.fontColor = SKColor.black()
+        wordLabel.fontColor = SKColor.black
         wordLabel.fontSize = 25
         wordLabel.fontName = mainFont
         wordLabel.position = CGPoint(x: 20, y:50.0)
@@ -166,7 +165,7 @@ class GameScene: SKScene {
         
         let base = SKSpriteNode (texture: nil, size: CGSize(width: frame.width, height : 10))
         base.position = CGPoint(x:frame.width/2, y: frame.height/6 )
-        base.color = SKColor.black()
+        base.color = SKColor.black
         base.name = "base"
         
         //topRight.physicsBody = SKPhysicsBody(circleOfRadius: 25)
@@ -188,13 +187,13 @@ class GameScene: SKScene {
         
         button2 = SKSpriteNode (texture: nil, size: CGSize(width: 150, height : 50))
         button2.position = CGPoint(x:frame.width-50, y: 50)
-        button2.color = SKColor.lightGray()
+        button2.color = SKColor.lightGray
         button2.name = "button2"
         addChild(button2)
         
         let label2 = SKLabelNode()
         label2.text = "Menu"
-        label2.fontColor = SKColor.black()
+        label2.fontColor = SKColor.black
         label2.fontSize = 20
         label2.fontName = mainFont
         label2.position = CGPoint(x:0, y:-(button2.frame.height/10))
@@ -209,7 +208,7 @@ class GameScene: SKScene {
     
     func loadWords () {
         
-        if let WordsPath = Bundle.main().pathForResource(file, ofType: "txt") {
+        if let WordsPath = Bundle.main.path(forResource: file, ofType: "txt") {
             //if let WordsPath = NSBundle.mainBundle().pathForResource("mbsingle", ofType: "txt") {
             if let startWords = try? String(contentsOfFile: WordsPath){
                 allWords = startWords.components(separatedBy: "\n")
@@ -497,7 +496,7 @@ class GameScene: SKScene {
                     case "button2" :
                         
                         print ("button2")
-                        button2.color = SKColor.red()
+                        button2.color = SKColor.red
                         RunAfterDelay(0.5) {
                             self.menuSceneDelegate?.loadMainScene()
                         }

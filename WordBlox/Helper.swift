@@ -44,30 +44,30 @@ func RandomColor() -> UIColor {
 
 func RandomFixedColor() -> UIColor {
     
-    var pickCol = UIColor.white()
+    var pickCol = UIColor.white
     
     let randCol = RandomInt(1, max: 7)
     switch randCol {
     case 1 :
-        pickCol = UIColor.red()
+        pickCol = UIColor.red
     case 2 :
-        pickCol = UIColor.gray()
+        pickCol = UIColor.gray
     case 3 :
-        pickCol = UIColor.green()
+        pickCol = UIColor.green
     case 4 :
-        pickCol = UIColor.yellow()
+        pickCol = UIColor.yellow
     case 5 :
-        pickCol = UIColor.blue()
+        pickCol = UIColor.blue
     case 6 :
-        pickCol = UIColor.purple()
+        pickCol = UIColor.purple
     case 7 :
-        pickCol = UIColor.cyan()
+        pickCol = UIColor.cyan
     case 8 :
-        pickCol = UIColor.magenta()
+        pickCol = UIColor.magenta
     case 9 :
-        pickCol = UIColor.orange()
+        pickCol = UIColor.orange
     case 10 :
-        pickCol = UIColor.brown()
+        pickCol = UIColor.brown
     default:
         break
     }
@@ -200,7 +200,8 @@ func randomScrabbleLetters() -> String {
 //    DispatchQueue.main.after(when: time, execute: block)
 //}
 
-func RunAfterDelay(_ delay: TimeInterval, block: (Void) -> Void) {
+func RunAfterDelay(_ delay: TimeInterval, block: @escaping (Void) -> Void) {
     let time = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-    DispatchQueue.main.after(when: time, execute: block)
+    //DispatchQueue.main.after(when: time, execute: block)
+    DispatchQueue.main.asyncAfter(deadline: time, execute: block)
 }

@@ -11,10 +11,10 @@ import UIKit
 
 func listAllFonts() {
     
-    for familyName in UIFont.familyNames() {
+    for familyName in UIFont.familyNames {
         print("------------------------------")
         print("Font Family Name = [\(familyName)]")
-        let names = String(UIFont.fontNames(forFamilyName: familyName))
+        let names = String(describing: UIFont.fontNames(forFamilyName: familyName))
         print("Font Names = [\(names)]")
     }
 }

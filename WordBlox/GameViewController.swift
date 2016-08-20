@@ -71,7 +71,8 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     /*============================================================*/
     
     func setupAudioPlayerWithFile(_ file:NSString, type:NSString) -> AVAudioPlayer  {
-        let url = Bundle.main().urlForResource(file as String, withExtension: type as String)
+        let url = Bundle.main.url(forResource: file as String, withExtension: type as String)
+        //let url = Bundle.main.urlForResource(file as String, withExtension: type as String)
         var audioPlayer:AVAudioPlayer?
         
         do {
@@ -171,7 +172,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     /*============================================================*/
     /*============================================================*/
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate: Bool {
         return true
     }
     
@@ -179,8 +180,8 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     /*============================================================*/
     /*============================================================*/
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.current().userInterfaceIdiom == .phone {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
         } else {
             return .all
@@ -200,7 +201,7 @@ class GameViewController: UIViewController, MenuSceneDelegate {
     /*============================================================*/
     /*============================================================*/
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     

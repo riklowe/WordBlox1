@@ -1,5 +1,5 @@
 //
-//  ana.swift
+//  Anagram.swift
 //  WordBlox1
 //
 //  Created by Richard Lowe on 23/02/2016.
@@ -45,6 +45,13 @@ class AnagramScene: SKScene {
     var wordtext: String = "" {
         didSet {
             wordLabel.text = wordtext
+        }
+    }
+    
+    var infoLabel: SKLabelNode!
+    var infotext: String = "" {
+        didSet {
+            infoLabel.text = infotext
         }
     }
     
@@ -118,6 +125,7 @@ class AnagramScene: SKScene {
         addButtons()
         
         wordtext = ""
+        infotext = ""
         
         loadWords()
         
@@ -160,7 +168,8 @@ class AnagramScene: SKScene {
     func prepareAVPlayer() {
         
         var backGroundMusic = AVAudioPlayer()
-        let bgMusicUrl:URL = Bundle.main().urlForResource("Click", withExtension: "wav")!
+        //let bgMusicUrl:URL = Bundle.main.urlForResource("Click", withExtension: "wav")!
+        let bgMusicUrl:URL = Bundle.main.url(forResource: "Click", withExtension: "wav")!
         
         do {
             backGroundMusic = try AVAudioPlayer(contentsOf:bgMusicUrl)
@@ -189,7 +198,7 @@ class AnagramScene: SKScene {
         
         let label = SKLabelNode()
         label.text = "Clear"
-        label.fontColor = SKColor.black()
+        label.fontColor = SKColor.black
         label.fontSize = 20
         label.fontName = mainFont
         label.position = CGPoint(x:0, y:-(button1.frame.height/10))
@@ -205,7 +214,7 @@ class AnagramScene: SKScene {
         
         let label2 = SKLabelNode()
         label2.text = "Menu"
-        label2.fontColor = SKColor.black()
+        label2.fontColor = SKColor.black
         label2.fontSize = 20
         label2.fontName = mainFont
         label2.position = CGPoint(x:0, y:-(button2.frame.height/10))
@@ -222,7 +231,7 @@ class AnagramScene: SKScene {
         
         let label3 = SKLabelNode()
         label3.text = "Search"
-        label3.fontColor = SKColor.black()
+        label3.fontColor = SKColor.black
         label3.fontSize = 20
         label3.fontName = mainFont
         label3.position = CGPoint(x:0, y:-(button3.frame.height/10))
@@ -231,15 +240,23 @@ class AnagramScene: SKScene {
         
         wordLabel = SKLabelNode(fontNamed:mainFont)
         wordLabel.text = ""
-        wordLabel.fontColor = SKColor.black()
+        wordLabel.fontColor = SKColor.black
         wordLabel.fontSize = 30
         wordLabel.position = CGPoint(x: 20, y: self.frame.height - 40)
         wordLabel.horizontalAlignmentMode = .left
         self.addChild(wordLabel)
         
+        infoLabel = SKLabelNode(fontNamed:mainFont)
+        infoLabel.text = ""
+        infoLabel.fontColor = SKColor.black
+        infoLabel.fontSize = 16
+        infoLabel.position = CGPoint(x: 20, y: self.frame.height - 260)
+        infoLabel.horizontalAlignmentMode = .left
+        self.addChild(infoLabel)
+        
         resultLabel = SKLabelNode(fontNamed:mainFont)
         resultLabel.text = ""
-        resultLabel.fontColor = SKColor.black()
+        resultLabel.fontColor = SKColor.black
         resultLabel.fontSize = 45
         resultLabel.position = CGPoint(x: 20, y: frame.height - 50)
         resultLabel.horizontalAlignmentMode = .left
@@ -262,7 +279,7 @@ class AnagramScene: SKScene {
         //        let allwords = wordsstring.componentsSeparatedByString("\n")
         
 
-        if let WordsPath = Bundle.main().pathForResource("ospd", ofType: "txt") {
+        if let WordsPath = Bundle.main.path(forResource: "ospd", ofType: "txt") {
         //if let WordsPath = NSBundle.mainBundle().pathForResource("mbsingle", ofType: "txt") {
             if let startWords = try? String(contentsOfFile: WordsPath) {
                 allWords = startWords.components(separatedBy: "\n")
@@ -452,6 +469,8 @@ class AnagramScene: SKScene {
 
         print ("Permutation count : \(myPermute4.count)")
         
+        //infotext = ("Permutations : \(myPermute4.count)")
+        
         //SET is UNIQUE list with NO duplicates ??? not sure about this
         //They are faster than arrays
         
@@ -478,6 +497,8 @@ class AnagramScene: SKScene {
         print ("Intersection count : \(tempArray.count)")
         TOCK("Intersection")
         
+        infotext = ("letter perms : \(myPermute4.count)         words : \(tempArray.count)")
+        
 //        TICK()
 //        //try with filter
 //        let arrFiltered = myPermute4.filter{ allWordsSET.contains($0) }
@@ -488,7 +509,10 @@ class AnagramScene: SKScene {
         //foundArray = tempArray.sort()
         
         TICK()
-        foundArray = tempArray.sorted(isOrderedBefore: { $0.characters.count > $1.characters.count })
+        //foundArray = tempArray.sorted(isOrderedBefore: { $0.characters.count > $1.characters.count })
+        
+        foundArray = tempArray.sorted()
+        
         TOCK("Sort")
 
         /*============================================================*/
@@ -499,52 +523,52 @@ class AnagramScene: SKScene {
         if firstTime == true {
             
             multiLabel1 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page1ScrollView.addChild(multiLabel1)
             
             multiLabel2 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page2ScrollView.addChild(multiLabel2)
             
             multiLabel3 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page3ScrollView.addChild(multiLabel3)
             
             multiLabel4 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page4ScrollView.addChild(multiLabel4)
             
             multiLabel5 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page5ScrollView.addChild(multiLabel5)
             
             multiLabel6 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page6ScrollView.addChild(multiLabel6)
             
             multiLabel7 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page7ScrollView.addChild(multiLabel7)
             
             multiLabel8 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page8ScrollView.addChild(multiLabel8)
             
             multiLabel9 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page9ScrollView.addChild(multiLabel9)
             
             multiLabel10 = SKMultilineLabel(text: "", labelWidth: Int(view!.frame.width-100) , pos: CGPoint(x:0, y: (page1ScrollView.frame.height/2) - 50),
-                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black(),
+                fontName: "ChalkboardSE-Regular", fontSize: 14, fontColor: SKColor.black,
                 leading: 18, alignment: .left , shouldShowBorder: false)
             page10ScrollView.addChild(multiLabel10)
             
@@ -590,38 +614,38 @@ class AnagramScene: SKScene {
                     break
                 case 141..<280 :
                     multiLabel2.text = multiLabel2.text +  String(foundArray[i]) + ", "
-                    hScrollLabel1.fontColor = UIColor.red()
+                    hScrollLabel1.fontColor = UIColor.red
                     break
                 case 281..<420 :
                     multiLabel3.text = multiLabel3.text +  String(foundArray[i]) + ", "
-                    hScrollLabel2.fontColor = UIColor.red()
+                    hScrollLabel2.fontColor = UIColor.red
                     break
                 case 421..<560 :
                     multiLabel4.text = multiLabel4.text +  String(foundArray[i]) + ", "
-                    hScrollLabel3.fontColor = UIColor.red()
+                    hScrollLabel3.fontColor = UIColor.red
                     break
                 case 561..<700 :
                     multiLabel5.text = multiLabel5.text +  String(foundArray[i]) + ", "
-                    hScrollLabel4.fontColor = UIColor.red()
+                    hScrollLabel4.fontColor = UIColor.red
                     break
                 case 701..<840 :
                     multiLabel6.text = multiLabel6.text +  String(foundArray[i]) + ", "
-                    hScrollLabel5.fontColor = UIColor.red()
+                    hScrollLabel5.fontColor = UIColor.red
                     break
                 case 841..<980 :
                     multiLabel7.text = multiLabel7.text +  String(foundArray[i]) + ", "
-                    hScrollLabel6.fontColor = UIColor.red()
+                    hScrollLabel6.fontColor = UIColor.red
                     break
                 case 981..<1120 :
                     multiLabel8.text = multiLabel8.text +  String(foundArray[i]) + ", "
-                    hScrollLabel7.fontColor = UIColor.red()
+                    hScrollLabel7.fontColor = UIColor.red
                     break
                 case 1121..<1260 :
                     multiLabel9.text = multiLabel9.text +  String(foundArray[i]) + ", "
-                    hScrollLabel8.fontColor = UIColor.red()
+                    hScrollLabel8.fontColor = UIColor.red
                    break
                 case 1261..<1400 :
-                    hScrollLabel10.fontColor = UIColor.red()
+                    hScrollLabel10.fontColor = UIColor.red
                     multiLabel9.text = multiLabel10.text +  String(foundArray[i]) + ", "
                     multiLabel10.text = multiLabel10.text +  String(foundArray[i]) + ", "
                     break
@@ -694,6 +718,7 @@ class AnagramScene: SKScene {
         scrollView.setContentOffset(CGPoint(x: frame.width * 9, y: 0), animated: true)
         TOCK("Display")
         
+        //infoLabel.text = ("")
         
         
     }
@@ -948,8 +973,9 @@ class AnagramScene: SKScene {
                 switch theName {
                 case "button1" :   //Clear
                     print ("button1")
-                    button1.color = SKColor.red()
+                    button1.color = SKColor.red
                     wordtext = ""
+                    infotext = ""
                     
                     if firstTime == false {
                         multiLabel1.text  = ""
@@ -971,7 +997,7 @@ class AnagramScene: SKScene {
                     
                 case "button2" :   //Main Menu
                     print ("button2")
-                    button2.color = SKColor.red()
+                    button2.color = SKColor.red
                     RunAfterDelay(0.5) {
                         self.menuSceneDelegate?.loadMainScene()
                     }
@@ -979,7 +1005,8 @@ class AnagramScene: SKScene {
                     
                 case "button3" :   //Search
                     print ("button3")
-                    button3.color = SKColor.red()
+                    
+                    button3.color = SKColor.red
                     if firstTime == false {
                         multiLabel1.text  = ""
                         multiLabel2.text  = ""
@@ -1042,6 +1069,8 @@ class AnagramScene: SKScene {
                             multiLabel9.text  = ""
                             multiLabel10.text  = ""
                         }
+                        
+                        infotext = ""
 
                     }
                     
@@ -1153,42 +1182,42 @@ class AnagramScene: SKScene {
         
         let boxPath = UIBezierPath(rect: scrollView.frame)
         let box = SKShapeNode(path: boxPath.cgPath)
-        box.strokeColor = SKColor.red()
+        box.strokeColor = SKColor.red
         box.lineWidth = 10.0
         moveableNode.addChild(box)
         
         
         /// ScrollView Sprites for each page in scrollView
         /// Makes positioning much easier.
-        page1ScrollView = SKSpriteNode(color: SKColor.clear(), size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
+        page1ScrollView = SKSpriteNode(color: SKColor.clear, size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
         page1ScrollView.position = CGPoint(x: scrollView.frame.midX, y: scrollView.frame.midY)
         moveableNode.addChild(page1ScrollView)
         
         let boxPath1 = UIBezierPath(rect: page1ScrollView.frame)
         let box1 = SKShapeNode(path: boxPath1.cgPath)
-        box1.strokeColor = SKColor.yellow()
+        box1.strokeColor = SKColor.yellow
         box1.lineWidth = 5.0
         moveableNode.addChild(box1)
         
         
-        page2ScrollView = SKSpriteNode(color: SKColor.clear(), size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
+        page2ScrollView = SKSpriteNode(color: SKColor.clear, size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
         page2ScrollView.position = CGPoint(x: scrollView.frame.midX, y: scrollView.frame.midY - (scrollView.frame.size.height))
         moveableNode.addChild(page2ScrollView)
         
         let boxPath2 = UIBezierPath(rect: page2ScrollView.frame)
         let box2 = SKShapeNode(path: boxPath2.cgPath)
-        box2.strokeColor = SKColor.orange()
+        box2.strokeColor = SKColor.orange
         box2.lineWidth = 5.0
         moveableNode.addChild(box2)
         
         
-        page3ScrollView = SKSpriteNode(color: SKColor.clear(), size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
+        page3ScrollView = SKSpriteNode(color: SKColor.clear, size: CGSize(width: scrollView.frame.size.width/2, height: scrollView.frame.size.height/2))
         page3ScrollView.position = CGPoint(x: scrollView.frame.midX, y: scrollView.frame.midY - (scrollView.frame.size.height * 2))
         moveableNode.addChild(page3ScrollView)
         
         let boxPath3 = UIBezierPath(rect: page3ScrollView.frame)
         let box3 = SKShapeNode(path: boxPath3.cgPath)
-        box3.strokeColor = SKColor.purple()
+        box3.strokeColor = SKColor.purple
         box3.lineWidth = 5.0
         moveableNode.addChild(box3)
         
@@ -1201,12 +1230,12 @@ class AnagramScene: SKScene {
         page1ScrollView.addChild(myLabel)
         
         /// Test sprite page 2
-        let sprite = SKSpriteNode(color: SKColor.red(), size: CGSize(width: 50, height: 50))
+        let sprite = SKSpriteNode(color: SKColor.red, size: CGSize(width: 50, height: 50))
         sprite.position = CGPoint(x: 0, y: 0)
         page2ScrollView.addChild(sprite)
         
         /// Test sprite page 3
-        let sprite2 = SKSpriteNode(color: SKColor.blue(), size: CGSize(width: 50, height: 50))
+        let sprite2 = SKSpriteNode(color: SKColor.blue, size: CGSize(width: 50, height: 50))
         sprite2.position = CGPoint(x: 0, y: 0)
         page3ScrollView.addChild(sprite2)
     }
@@ -1262,7 +1291,7 @@ class AnagramScene: SKScene {
         
         let boxPath1 = UIBezierPath(rect: page1ScrollView.frame)
         let box1 = SKShapeNode(path: boxPath1.cgPath)
-        box1.strokeColor = SKColor.lightGray()
+        box1.strokeColor = SKColor.lightGray
         box1.lineWidth = 5.0
         moveableNode.addChild(box1)
         
@@ -1274,7 +1303,7 @@ class AnagramScene: SKScene {
         
         let boxPath2 = UIBezierPath(rect: page2ScrollView.frame)
         let box2 = SKShapeNode(path: boxPath2.cgPath)
-        box2.strokeColor = SKColor.lightGray()
+        box2.strokeColor = SKColor.lightGray
         box2.lineWidth = 5.0
         moveableNode.addChild(box2)
         
@@ -1287,7 +1316,7 @@ class AnagramScene: SKScene {
         
         let boxPath3 = UIBezierPath(rect: page3ScrollView.frame)
         let box3 = SKShapeNode(path: boxPath3.cgPath)
-        box3.strokeColor = SKColor.lightGray()
+        box3.strokeColor = SKColor.lightGray
         box3.lineWidth = 5.0
         moveableNode.addChild(box3)
         
@@ -1300,7 +1329,7 @@ class AnagramScene: SKScene {
         
         let boxPath4 = UIBezierPath(rect: page4ScrollView.frame)
         let box4 = SKShapeNode(path: boxPath4.cgPath)
-        box4.strokeColor = SKColor.lightGray()
+        box4.strokeColor = SKColor.lightGray
         box4.lineWidth = 5.0
         moveableNode.addChild(box4)
         
@@ -1313,7 +1342,7 @@ class AnagramScene: SKScene {
         
         let boxPath5 = UIBezierPath(rect: page5ScrollView.frame)
         let box5 = SKShapeNode(path: boxPath5.cgPath)
-        box5.strokeColor = SKColor.lightGray()
+        box5.strokeColor = SKColor.lightGray
         box5.lineWidth = 5.0
         moveableNode.addChild(box5)
         
@@ -1326,7 +1355,7 @@ class AnagramScene: SKScene {
         
         let boxPath6 = UIBezierPath(rect: page6ScrollView.frame)
         let box6 = SKShapeNode(path: boxPath6.cgPath)
-        box6.strokeColor = SKColor.lightGray()
+        box6.strokeColor = SKColor.lightGray
         box6.lineWidth = 5.0
         moveableNode.addChild(box6)
         
@@ -1338,7 +1367,7 @@ class AnagramScene: SKScene {
         
         let boxPath7 = UIBezierPath(rect: page7ScrollView.frame)
         let box7 = SKShapeNode(path: boxPath7.cgPath)
-        box7.strokeColor = SKColor.lightGray()
+        box7.strokeColor = SKColor.lightGray
         box7.lineWidth = 5.0
         moveableNode.addChild(box7)
         
@@ -1350,7 +1379,7 @@ class AnagramScene: SKScene {
         
         let boxPath8 = UIBezierPath(rect: page8ScrollView.frame)
         let box8 = SKShapeNode(path: boxPath8.cgPath)
-        box8.strokeColor = SKColor.lightGray()
+        box8.strokeColor = SKColor.lightGray
         box8.lineWidth = 5.0
         moveableNode.addChild(box8)
         
@@ -1362,7 +1391,7 @@ class AnagramScene: SKScene {
         
         let boxPath9 = UIBezierPath(rect: page9ScrollView.frame)
         let box9 = SKShapeNode(path: boxPath9.cgPath)
-        box9.strokeColor = SKColor.lightGray()
+        box9.strokeColor = SKColor.lightGray
         box9.lineWidth = 5.0
         moveableNode.addChild(box9)
         
@@ -1374,7 +1403,7 @@ class AnagramScene: SKScene {
         
         let boxPath10 = UIBezierPath(rect: page10ScrollView.frame)
         let box10 = SKShapeNode(path: boxPath10.cgPath)
-        box10.strokeColor = SKColor.lightGray()
+        box10.strokeColor = SKColor.lightGray
         box10.lineWidth = 5.0
         moveableNode.addChild(box10)
         
@@ -1386,7 +1415,7 @@ class AnagramScene: SKScene {
         //
         hScrollLabel1.text = " ---->"
         hScrollLabel1.fontSize = 16
-        hScrollLabel1.fontColor = SKColor.red()
+        hScrollLabel1.fontColor = SKColor.red
         hScrollLabel1.position = CGPoint(x: 0,  y: -(page1ScrollView.frame.height / 3))
         page1ScrollView.addChild(hScrollLabel1)
         //
@@ -1397,7 +1426,7 @@ class AnagramScene: SKScene {
         //
         hScrollLabel2.text = "<-----  ---->"
         hScrollLabel2.fontSize = 16
-        hScrollLabel2.fontColor = SKColor.red()
+        hScrollLabel2.fontColor = SKColor.red
         hScrollLabel2.position = CGPoint(x: 0,  y: -(page2ScrollView.frame.height / 3))
         page2ScrollView.addChild(hScrollLabel2)
         //
@@ -1408,7 +1437,7 @@ class AnagramScene: SKScene {
         //
         hScrollLabel3.text = "<-----  ---->"
         hScrollLabel3.fontSize = 16
-        hScrollLabel3.fontColor = SKColor.red()
+        hScrollLabel3.fontColor = SKColor.red
         hScrollLabel3.position = CGPoint(x: 0,  y: -(page3ScrollView.frame.height / 3))
         page3ScrollView.addChild(hScrollLabel3)
         //
@@ -1419,7 +1448,7 @@ class AnagramScene: SKScene {
         //
         hScrollLabel4.text = "<-----  ---->"
         hScrollLabel4.fontSize = 16
-        hScrollLabel4.fontColor = SKColor.red()
+        hScrollLabel4.fontColor = SKColor.red
         hScrollLabel4.position = CGPoint(x: 0,  y: -(page4ScrollView.frame.height / 3))
         page4ScrollView.addChild(hScrollLabel4)
         //
@@ -1430,37 +1459,37 @@ class AnagramScene: SKScene {
         //
         hScrollLabel5.text = "<-----  ---->"
         hScrollLabel5.fontSize = 16
-        hScrollLabel5.fontColor = SKColor.red()
+        hScrollLabel5.fontColor = SKColor.red
         hScrollLabel5.position = CGPoint(x: 0,  y: -(page5ScrollView.frame.height / 3))
         page5ScrollView.addChild(hScrollLabel5)
         
         hScrollLabel6.text = "<-----  ---->"
         hScrollLabel6.fontSize = 16
-        hScrollLabel6.fontColor = SKColor.red()
+        hScrollLabel6.fontColor = SKColor.red
         hScrollLabel6.position = CGPoint(x: 0,  y: -(page6ScrollView.frame.height / 3))
         page6ScrollView.addChild(hScrollLabel6)
         
         hScrollLabel7.text = "<-----  ---->"
         hScrollLabel7.fontSize = 16
-        hScrollLabel7.fontColor = SKColor.red()
+        hScrollLabel7.fontColor = SKColor.red
         hScrollLabel7.position = CGPoint(x: 0,  y: -(page7ScrollView.frame.height / 3))
         page7ScrollView.addChild(hScrollLabel7)
         
         hScrollLabel8.text = "<-----  ---->"
         hScrollLabel8.fontSize = 16
-        hScrollLabel8.fontColor = SKColor.red()
+        hScrollLabel8.fontColor = SKColor.red
         hScrollLabel8.position = CGPoint(x: 0,  y: -(page8ScrollView.frame.height / 3))
         page8ScrollView.addChild(hScrollLabel8)
         
         hScrollLabel9.text = "<-----  ---->"
         hScrollLabel9.fontSize = 16
-        hScrollLabel9.fontColor = SKColor.red()
+        hScrollLabel9.fontColor = SKColor.red
         hScrollLabel9.position = CGPoint(x: 0,  y: -(page9ScrollView.frame.height / 3))
         page9ScrollView.addChild(hScrollLabel9)
         
         hScrollLabel10.text = "<----- "
         hScrollLabel10.fontSize = 16
-        hScrollLabel10.fontColor = SKColor.red()
+        hScrollLabel10.fontColor = SKColor.red
         hScrollLabel10.position = CGPoint(x: 0,  y: -(page10ScrollView.frame.height / 3))
         page10ScrollView.addChild(hScrollLabel10)
         

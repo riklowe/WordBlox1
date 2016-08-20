@@ -288,7 +288,7 @@ public extension Color {
         return modifiedColor(1.0 - percentage)
     }
     
-    private func modifiedColor(_ percentage: CGFloat) -> Color {
+    func modifiedColor(_ percentage: CGFloat) -> Color {
         let hsbaT = hsba()
         return Color(hsba: (hsbaT.h, hsbaT.s, hsbaT.b * percentage, hsbaT.a))
     }
@@ -298,7 +298,7 @@ public extension Color {
     func blackOrWhiteContrastingColor() -> Color {
         let rgbaT = rgba()
         let value = 1 - ((0.299 * rgbaT.r) + (0.587 * rgbaT.g) + (0.114 * rgbaT.b));
-        return value < 0.5 ? Color.black() : Color.white()
+        return value < 0.5 ? Color.black : Color.white
     }
     
     
@@ -324,28 +324,28 @@ public extension Color {
         }
     }
     
-    private class func analgousColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
+    class func analgousColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
         return [Color(hsba: (self.addDegree(30, staticDegree: hsbaT.h*360)/360.0, hsbaT.s-0.05, hsbaT.b-0.1, hsbaT.a)),
             Color(hsba: (self.addDegree(15, staticDegree: hsbaT.h*360)/360.0, hsbaT.s-0.05, hsbaT.b-0.05, hsbaT.a)),
             Color(hsba: (self.addDegree(-15, staticDegree: hsbaT.h*360)/360.0, hsbaT.s-0.05, hsbaT.b-0.05, hsbaT.a)),
             Color(hsba: (self.addDegree(-30, staticDegree: hsbaT.h*360)/360.0, hsbaT.s-0.05, hsbaT.b-0.1, hsbaT.a))]
     }
     
-    private class func monochromaticColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
+    class func monochromaticColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
         return [Color(hsba: (hsbaT.h, hsbaT.s/2, hsbaT.b/3, hsbaT.a)),
             Color(hsba: (hsbaT.h, hsbaT.s, hsbaT.b/2, hsbaT.a)),
             Color(hsba: (hsbaT.h, hsbaT.s/3, 2*hsbaT.b/3, hsbaT.a)),
             Color(hsba: (hsbaT.h, hsbaT.s, 4*hsbaT.b/5, hsbaT.a))]
     }
     
-    private class func triadColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
+    class func triadColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
         return [Color(hsba: (self.addDegree(120, staticDegree: hsbaT.h*360)/360.0, 2*hsbaT.s/3, hsbaT.b-0.05, hsbaT.a)),
             Color(hsba: (self.addDegree(120, staticDegree: hsbaT.h*360)/360.0, hsbaT.s, hsbaT.b, hsbaT.a)),
             Color(hsba: (self.addDegree(240, staticDegree: hsbaT.h*360)/360.0, hsbaT.s, hsbaT.b, hsbaT.a)),
             Color(hsba: (self.addDegree(240, staticDegree: hsbaT.h*360)/360.0, 2*hsbaT.s/3, hsbaT.b-0.05, hsbaT.a))]
     }
     
-    private class func complementaryColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
+    class func complementaryColors(_ hsbaT: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat)) -> [Color] {
         return [Color(hsba: (hsbaT.h, hsbaT.s, 4*hsbaT.b/5, hsbaT.a)),
             Color(hsba: (hsbaT.h, 5*hsbaT.s/7, hsbaT.b, hsbaT.a)),
             Color(hsba: (self.addDegree(180, staticDegree: hsbaT.h*360)/360.0, hsbaT.s, hsbaT.b, hsbaT.a)),
@@ -871,11 +871,11 @@ public extension Color {
     
     
     // MARK: - Private Helpers
-    private class func colorWith(_ R: CGFloat, G: CGFloat, B: CGFloat, A: CGFloat) -> Color {
+    class func colorWith(_ R: CGFloat, G: CGFloat, B: CGFloat, A: CGFloat) -> Color {
         return Color(rgba: (R/255.0, G/255.0, B/255.0, A))
     }
     
-    private class func addDegree(_ addDegree: CGFloat, staticDegree: CGFloat) -> CGFloat {
+    class func addDegree(_ addDegree: CGFloat, staticDegree: CGFloat) -> CGFloat {
         let s = staticDegree + addDegree;
         if (s > 360) {
             return s - 360;

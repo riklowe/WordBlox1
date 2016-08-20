@@ -56,21 +56,21 @@ class CustomScrollView: UIScrollView {
     static var disabledTouches = false
     
     /// Scroll view
-    private static var scrollView: UIScrollView!
+    static var scrollView: UIScrollView!
     
     // MARK: - Properties
     
     /// Current scene
-    private weak var currentScene: SKScene?
+    weak var currentScene: SKScene?
     
     /// Current view
-    private weak var currentView: UIView?
+    weak var currentView: UIView?
     
     /// Moveable node
-    private var moveableNode: SKNode?
+    var moveableNode: SKNode?
     
     /// Scroll direction
-    private var scrollDirection = ScrollDirection.none
+    var scrollDirection = ScrollDirection.none
     
     // MARK: - Init
     init(frame: CGRect, scene: SKScene, moveableNode: SKNode, scrollDirection: ScrollDirection, view: UIView) {
@@ -90,7 +90,7 @@ class CustomScrollView: UIScrollView {
 
         let boxPath5 = UIBezierPath(rect: self.frame)
         let box5 = SKShapeNode(path: boxPath5.cgPath)
-        box5.strokeColor = SKColor.black()
+        box5.strokeColor = SKColor.black
         box5.lineWidth = 5.0
         scene.addChild(box5)
         
@@ -200,7 +200,7 @@ extension CustomScrollView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print("Scroll view did scroll")
         
-        if scrollDirection == .horizontal {
+        if self.scrollDirection == ScrollDirection.horizontal {
             moveableNode?.position.x = scrollView.contentOffset.x
         } else {
             moveableNode?.position.y = scrollView.contentOffset.y
