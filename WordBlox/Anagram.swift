@@ -368,7 +368,7 @@ class AnagramScene: SKScene {
         
     }
     
-    func updateTimer () {
+    @objc func updateTimer () {
         print("**************************** updateTimer ******************************")
     }
     

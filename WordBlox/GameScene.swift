@@ -257,7 +257,7 @@ class GameScene: SKScene {
     /*============================================================*/
     /*============================================================*/
     
-    func updateTimer () {
+    @objc func updateTimer () {
         
         timer.invalidate()
         
